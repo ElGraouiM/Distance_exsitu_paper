@@ -49,7 +49,7 @@ for (i in 1:length(spp)) {
   sp <- spp[i]
   
   # select G points
-  seed <- sv[sv$species==sp & sv$gh=="seed", ]
+  seed <- sv[sv$species==sp & sv$type=="seed", ]
   
   # get range
   r <- terra::rast(paste0("data/intermediate/sdm/adj/adj_", sp, ".tif"))
@@ -85,7 +85,7 @@ for (i in 1:length(spp)) {
   sp <- spp[i]
   
   # select G points
-  seed <- sv[sv$species==sp & sv$gh=="seed", ]
+  seed <- sv[sv$species==sp & sv$type =="seed", ]
   
   # get range
   r <- terra::rast(paste0("data/intermediate/sdm/adj/adj_", sp, ".tif"))
