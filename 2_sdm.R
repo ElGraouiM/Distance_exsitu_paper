@@ -1,5 +1,5 @@
 ## 2- species distribution modeling and range definition
-## packages used: terra, predicts
+## packages used: terra, predicts, XSitu
 
 wd <- "XC_vigna"
 
@@ -54,7 +54,7 @@ for (sp in usp) {
   
   f3 <- paste0("data/intermediate/sdm/adj/adj_", sp, ".tif")
   
-  p_adj <- exsitu::adjust_range(p_range, obs, afr, CAmin=100000, CAmax=250000)
+  p_adj <- XSitu::adjust_range(p_range, obs, afr, CAmin=100000, CAmax=250000)
   
   p_adj <- terra::writeRaster(p_adj, f3, overwrite=TRUE)
   

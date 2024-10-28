@@ -53,12 +53,12 @@ for (i in 1:length(spp)) {
   
   # get range
   r <- terra::rast(paste0("data/intermediate/sdm/adj/adj_", sp, ".tif"))
-  k <- exsitu::get_samplesize(r, fun=fun)
+  k <- XSitu::get_samplesize(r, fun=fun)
   
-  zones <- exsitu:::make_zones(xy, k$range, k$n, spread=TRUE)
+  zones <- XSitu:::make_zones(xy, k$range, k$n, spread=TRUE)
   
   # get conservation score
-  exs <- exsitu::XS_net(zones, seed, env, envdist, maxlink=1500)
+  exs <- XSitu::XS_net(zones, seed, env, envdist, maxlink=1500)
   write.csv(exs$dist, paste0("data/final/XS_dist/", sp, "_dist.csv"), row.names=FALSE)
   out[i, 2:3] <- c(k$n, exs$score)
   
@@ -89,7 +89,7 @@ for (i in 1:length(spp)) {
   
   # get range
   r <- terra::rast(paste0("data/intermediate/sdm/adj/adj_", sp, ".tif"))
-  k <- exsitu::get_samplesize(r, fun=fun)
+  k <- XSitu::get_samplesize(r, fun=fun)
   
   xys <- terra::mask(xy, k$range)
   km <- terra::k_means(xys, k$n, iter.max = 25)
@@ -97,7 +97,7 @@ for (i in 1:length(spp)) {
   #terra::saveRDS(zones, paste0("data/intermediate/kmzones/kmz_", sp, ".rds")) 
   
   # get conservation score
-  exs <- exsitu:::XS_dendro(zones, seed, env, envdist, adjust=FALSE)
+  exs <- XSitu:::XS_dendro(zones, seed, env, envdist, adjust=FALSE)
   out[i, 2:3] <- c(k$n, exs$score)
   
   if (!is.null(exs$dist)) {
